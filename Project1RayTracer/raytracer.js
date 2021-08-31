@@ -326,6 +326,7 @@ window.renderScene = function(e) {
     var element = document.querySelector("#canvas");
     updateColor();
     updateCenter();
+    updateRadius();
     //console.log(scene);
     
 
@@ -393,12 +394,24 @@ function updateCenter()
     scene.objects[4].center = rTopxyz;
     scene.objects[5].center = lBotxyz;
     scene.objects[6].center = lTopxyz;
-
-    
-
-
 }
 
+function updateRadius()
+{
+    var lTop = document.getElementById("lTopRad");
+    var lBot = document.getElementById("lBotRad");
+    var mTop = document.getElementById("mTopRad");
+    var mBot = document.getElementById("mBotRad");
+    var rTop = document.getElementById("rTopRad");
+    var rBot = document.getElementById("rBotRad");
+
+    scene.objects[1].radius = parseFloat(mBot.value);
+    scene.objects[2].radius = parseFloat(mTop.value);
+    scene.objects[3].radius = parseFloat(rBot.value);
+    scene.objects[4].radius = parseFloat(rTop.value);
+    scene.objects[5].radius = parseFloat(lBot.value);
+    scene.objects[6].radius = parseFloat(lTop.value);
+}
 function init()
 {
     var element = document.querySelector("#canvas");
