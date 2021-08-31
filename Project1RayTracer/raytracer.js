@@ -380,19 +380,19 @@ function updateCenter()
     var rBoty = document.getElementById("rBoty");
     var rBotz = document.getElementById("rBotz");
 
-    var lTopxyz = [lTopx.value, lTopy.value, lTopz.value];
-    var lBotxyz = [lBotx.value, lBoty.value, lBotz.value];
-    var mTopxyz = [mTopx.value, mTopy.value, mTopz.value];
-    var mBotxyz = [mBotx.value, mBoty.value, mBotz.value];
-    var rTopxyz = [rTopx.value, rTopy.value, rTopz.value];
-    var rBotxyz = [rBotx.value, rBoty.value, rBotz.value];
+    var lTopxyz = [parseFloat(lTopx.value), parseFloat(lTopy.value), parseFloat(lTopz.value)];
+    var lBotxyz = [parseFloat(lBotx.value), parseFloat(lBoty.value), parseFloat(lBotz.value)];
+    var mTopxyz = [parseFloat(mTopx.value), parseFloat(mTopy.value), parseFloat(mTopz.value)];
+    var mBotxyz = [parseFloat(mBotx.value), parseFloat(mBoty.value), parseFloat(mBotz.value)];
+    var rTopxyz = [parseFloat(rTopx.value), parseFloat(rTopy.value), parseFloat(rTopz.value)];
+    var rBotxyz = [parseFloat(rBotx.value), parseFloat(rBoty.value), parseFloat(rBotz.value)];
 
-     scene.objects[1].center = mBotxyz;
-    // scene.objects[2].center = mTopxyz;
-    // scene.objects[3].center = rBotxyz;
-    // scene.objects[4].center = rTopxyz;
-    // scene.objects[5].center = lBotxyz;
-    // scene.objects[6].center = lTopxyz;
+    scene.objects[1].center = mBotxyz;
+    scene.objects[2].center = mTopxyz;
+    scene.objects[3].center = rBotxyz;
+    scene.objects[4].center = rTopxyz;
+    scene.objects[5].center = lBotxyz;
+    scene.objects[6].center = lTopxyz;
 
     
 
