@@ -67,14 +67,82 @@
         <button onclick="window.renderScene(this)">Render scene</button>
         <table id="objectData">
             <tr> 
+                <th>Sphere</th>
                 <th>Color</th>
                 <th>Center</th>
                 <th>Radius</th>
-                <th>specularExponent</th>
-                <th>specularK</th>
-                <th>ambientK</th>
-                <th>diffuseK</th>
-                <th>reflectiveK</th>
+            </tr>
+            <tr> 
+                <td>Left Top</td>
+                <td><input type="color" value="#ffff00" id="lTopRGB"></td>
+                <td> 
+                    <form>
+                        <label> (x,y,z) </label>
+                        <input type="number" id="lTopx" min="-5" max="5" step=".05" value="-2.5">
+                        <input type="number" id="lTopy" min="-5" max="5" step=".05" value="-1.75">
+                        <input type="number" id="lTopz" min="-5" max="5" step=".05" value="0">
+                    </form>
+                </td>
+            </tr>
+            <tr> 
+                <td>Left Bottom</td>
+                <td><input type="color" value="#ffff00" id="lBotRGB"></td>
+                <td> 
+                    <form>
+                        <label> (x,y,z) </label>
+                        <input type="number" id="lBotx" min="-5" max="5" step=".05" value="-2.5">
+                        <input type="number" id="lBoty" min="-5" max="5" step=".05" value="-.75">
+                        <input type="number" id="lBotz" min="-5" max="5" step=".05" value="0">
+                    </form>
+                </td>
+            </tr>
+            <tr> 
+                <td>Middle Top</td>
+                <td><input type="color" value="#ff0000" id="mTopRGB"></td>
+                <td> 
+                    <form>
+                        <label> (x,y,z) </label>
+                        <input type="number" id="mTopx" min="-5" max="5" step=".05" value="0">
+                        <input type="number" id="mTopy" min="-5" max="5" step=".05" value="-2.75">
+                        <input type="number" id="mTopz" min="-5" max="5" step=".05" value="0">
+                    </form>
+                </td>
+            </tr>
+            <tr> 
+                <td>Middle Bottom</td>
+                <td><input type="color" value="#ff0000" id="mBotRGB"></td>
+                <td>
+                    <form>
+                        <label> (x,y,z) </label>
+                        <input type="number" id="mBotx" min="-5" max="5" step=".05" value="0">
+                        <input type="number" id="mBoty" min="-5" max="5" step=".05" value="-1.25">
+                        <input type="number" id="mBotz" min="-5" max="5" step=".05" value="0">
+                    </form>
+                </td>
+            </tr>
+            <tr> 
+                <td>Right Top</td>
+                <td><input type="color" value="#00ff00" id="rTopRGB"></td>
+                <td>
+                    <form>
+                        <label> (x,y,z) </label>
+                        <input type="number" id="rTopx" min="-5" max="5" step=".05" value="2.5">
+                        <input type="number" id="rTopy" min="-5" max="5" step=".05" value="-2.75">
+                        <input type="number" id="rTopz" min="-5" max="5" step=".05" value="0">
+                    </form>
+                </td>
+            </tr>
+            <tr> 
+                <td>Right Bottom</td>
+                <td><input type="color" value="#00ff00" id="rBotRGB"></td>
+                <td>
+                    <form>
+                        <label> (x,y,z) </label>
+                        <input type="number" id="rBotx" min="-5" max="5" step=".05" value="2.5">
+                        <input type="number" id="rBoty" min="-5" max="5" step=".05" value="-1.25">
+                        <input type="number" id="rBotz" min="-5" max="5" step=".05" value="0">
+                    </form>
+                </td>
             </tr>
         </table>
         <button onclick="window.renderScene(this)">Render scene</button>

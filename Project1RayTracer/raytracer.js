@@ -324,89 +324,85 @@ window.toggleReflection = function() {
 */
 window.renderScene = function(e) {
     var element = document.querySelector("#canvas");
-
-    //loops through rows    
-    for (var i = 1; i < 7; i++)
-    {
-        scene.objects[i].color = getValueFromTable(i, 0);
-        scene.objects[i].center = getValueFromTable(i, 1);
-        scene.objects[i].radius  = getValueFromTable(i, 2);
-        scene.objects[i].specularExponent = getValueFromTable(i, 3);
-        scene.objects[i].specularK = getValueFromTable(i, 4);
-        scene.objects[i].ambientK = getValueFromTable(i, 5);
-        scene.objects[i].diffuseK = getValueFromTable(i, 6);
-        scene.objects[i].reflectiveK = getValueFromTable(i, 7);
-    }
+    updateColor();
+    updateCenter();
+    //console.log(scene);
+    
 
     render(element);
     //console.log(scene);
 }
-
-function getValueFromTable(i, j)
+function updateColor()
 {
-    var table = document.getElementById("objectData");
+    var lTop = document.getElementById("lTopRGB");
+    var lBot = document.getElementById("lBotRGB");
+    var mTop = document.getElementById("mTopRGB");
+    var mBot = document.getElementById("mBotRGB");
+    var rTop = document.getElementById("rTopRGB");
+    var rBot = document.getElementById("rBotRGB");
+    var lTopRGB = [hexToRgb(lTop.value).r, hexToRgb(lTop.value).g, hexToRgb(lTop.value).b];
+    var lBotRGB = [hexToRgb(lBot.value).r, hexToRgb(lBot.value).g, hexToRgb(lBot.value).b];
+    var mTopRGB = [hexToRgb(mTop.value).r, hexToRgb(mTop.value).g, hexToRgb(mTop.value).b];
+    var mBotRGB = [hexToRgb(mBot.value).r, hexToRgb(mBot.value).g, hexToRgb(mBot.value).b];
+    var rTopRGB = [hexToRgb(rTop.value).r, hexToRgb(rTop.value).g, hexToRgb(rTop.value).b];
+    var rBotRGB = [hexToRgb(rBot.value).r, hexToRgb(rBot.value).g, hexToRgb(rBot.value).b];
+    scene.objects[1].color = mBotRGB;
+    scene.objects[2].color = mTopRGB;
+    scene.objects[3].color = rBotRGB;
+    scene.objects[4].color = rTopRGB;
+    scene.objects[5].color = lBotRGB;
+    scene.objects[6].color = lTopRGB;
+}
 
-    var oCells = table.rows.item(i).cells;
-    if(j == 0)
-    {
-        var cellVal = oCells.item(j).innerHTML;
-        cellVal = cellVal.substring(cellVal.indexOf(">")+1, cellVal.lastIndexOf("<"));
-        var cellArray = new Array();
-        cellArray = cellVal.split(",");
-        for (var a in cellArray ) 
-        {
-            cellArray[a] = parseInt(cellArray[a], 10);
-        }
-        return cellArray; 
+function updateCenter()
+{
+    var lTopx = document.getElementById("lTopx");
+    var lTopy = document.getElementById("lTopy");
+    var lTopz = document.getElementById("lTopz");
 
-    }
-    else if(j == 1)
-    {
-        var cellVal = oCells.item(j).innerHTML;
-        cellVal = cellVal.substring(cellVal.indexOf(">")+1, cellVal.lastIndexOf("<"));
-        var cellArray = new Array();
-        cellArray = cellVal.split(",");
-        for (var a in cellArray ) 
-        {
-            cellArray[a] = parseFloat(cellArray[a]);
-        }
-        return cellArray; 
+    var lBotx = document.getElementById("lBotx");
+    var lBoty = document.getElementById("lBoty");
+    var lBotz = document.getElementById("lBotz");
 
-    }
-    else
-    {
-        var cellVal = oCells.item(j).innerHTML;
-        cellVal = cellVal.substring(cellVal.indexOf(">")+1, cellVal.lastIndexOf("<"));
-        cellVal = parseFloat(cellVal);
-        return cellVal;
-    }
+    var mTopx = document.getElementById("mTopx");
+    var mTopy = document.getElementById("mTopy");
+    var mTopz = document.getElementById("mTopz");
+
+    var mBotx = document.getElementById("mBotx");
+    var mBoty = document.getElementById("mBoty");
+    var mBotz = document.getElementById("mBotz");
+
+    var rTopx = document.getElementById("rTopx");
+    var rTopy = document.getElementById("rTopy");
+    var rTopz = document.getElementById("rTopz");
+
+    var rBotx = document.getElementById("rBotx");
+    var rBoty = document.getElementById("rBoty");
+    var rBotz = document.getElementById("rBotz");
+
+    var lTopxyz = [lTopx.value, lTopy.value, lTopz.value];
+    var lBotxyz = [lBotx.value, lBoty.value, lBotz.value];
+    var mTopxyz = [mTopx.value, mTopy.value, mTopz.value];
+    var mBotxyz = [mBotx.value, mBoty.value, mBotz.value];
+    var rTopxyz = [rTopx.value, rTopy.value, rTopz.value];
+    var rBotxyz = [rBotx.value, rBoty.value, rBotz.value];
+
+     scene.objects[1].center = mBotxyz;
+    // scene.objects[2].center = mTopxyz;
+    // scene.objects[3].center = rBotxyz;
+    // scene.objects[4].center = rTopxyz;
+    // scene.objects[5].center = lBotxyz;
+    // scene.objects[6].center = lTopxyz;
+
+    
+
+
 }
 
 function init()
 {
     var element = document.querySelector("#canvas");
     render(element);
-    var table = document.getElementById("objectData");
-    for(var i = 1; i < 7; i++)
-    {
-        var newRow = table.insertRow(table.length);
-        var cell = newRow.insertCell(0);
-        cell.innerHTML = "<div contenteditable>" + scene.objects[i].color + "</div>";
-        var cell = newRow.insertCell(1);
-        cell.innerHTML = "<div contenteditable>" + scene.objects[i].center + "</div>";
-        var cell = newRow.insertCell(2);
-        cell.innerHTML = "<div contenteditable>" + scene.objects[i].radius + "</div>";
-        var cell = newRow.insertCell(3);
-        cell.innerHTML = "<div contenteditable>" + scene.objects[i].specularExponent + "</div>";
-        var cell = newRow.insertCell(4);
-        cell.innerHTML = "<div contenteditable>" + scene.objects[i].specularK + "</div>";
-        var cell = newRow.insertCell(5);
-        cell.innerHTML = "<div contenteditable>" + scene.objects[i].ambientK + "</div>";
-        var cell = newRow.insertCell(6);
-        cell.innerHTML = "<div contenteditable>" + scene.objects[i].diffuseK + "</div>";
-        var cell = newRow.insertCell(7);
-        cell.innerHTML = "<div contenteditable>" + scene.objects[i].reflectiveK + "</div>";
-    }
 
 }
 

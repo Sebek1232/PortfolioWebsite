@@ -20,7 +20,7 @@ function getDataArray(){
             {
                 "center": [0,-1.25,0],
                 "radius": 1.25,
-                "color": [0,0,0],
+                "color": [255,0,0],
                 "specularExponent": 500,
                 "specularK": 0.001,
                 "ambientK": 0.001,
