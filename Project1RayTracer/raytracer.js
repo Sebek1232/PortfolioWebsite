@@ -290,7 +290,6 @@ window.handleFile = function(e) {
 
 window.updateMaxDepth = function() {
     depth = document.querySelector("#maxDepth").value;
-    console.log(depth);
     var element = document.querySelector("#canvas");
     render(element);
 }
