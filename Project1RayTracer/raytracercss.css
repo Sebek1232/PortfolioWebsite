@@ -1,0 +1,126 @@
+body { 
+    background-color: #293241;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#config {
+    display: inline-block;
+    vertical-align: top;
+    background-color: #3d5a80;
+    color: white;
+    border-style: solid;
+    border-color: #ee6c4d;
+    border-width: 2px;
+    text-align: center;
+    border-radius: 25px;
+    margin: 5px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+}
+#canvas {
+    width: 800px;
+    height: 600px;
+    display: inline-block;
+    background-color: white;
+    margin: 5px;
+}
+#wrapper
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+}
+table
+{
+    border-collapse: collapse;
+    text-align: center;
+    margin: auto;
+}
+
+td, th 
+{
+    border: 2px solid #ee6c4d;
+    padding: 0.5rem;
+    text-align: center;
+}
+input[type=checkbox]   
+{
+     position: relative;
+       cursor: pointer;
+}
+input[type=checkbox]:before 
+{
+     content: "";
+     display: block;
+     position: absolute;
+     width: 16px;
+     height: 16px;
+     top: 0;
+     left: 0;
+     border-radius: 3px;
+     background-color: #ee6c4d;
+}
+input[type=checkbox]:checked:after 
+{
+     content: "";
+     display: block;
+     width: 5px;
+     height: 10px;
+     border: solid white;
+     border-width: 0 3px 3px 0;
+     -webkit-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     transform: rotate(45deg);
+     position: absolute;
+     top: 0;
+     left: 4px;
+}
+
+input[type=number]   
+{
+    width: 60px;
+    height: 20px;
+    background-color: #ee6c4d;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+input[type=color]
+{
+    width: 25px;
+    height: 25px;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 50%;
+    -webkit-appearance: none;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper 
+{
+    padding: 0; 
+}
+input[type=color]::-webkit-color-swatch 
+{
+    border: none;
+    border-radius: 50%;
+}
+button
+{
+    background-color: #ee6c4d;
+    color: black;
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 12px;
+    border: 4px solid #293241;
+    border-radius: 25px;
+}
+button:hover
+{
+    background-color: #293241;
+    color:white
+}
