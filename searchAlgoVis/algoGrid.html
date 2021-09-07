@@ -1,0 +1,107 @@
+<html> 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .grid 
+    { 
+        margin:1em auto; border-collapse:collapse 
+    }
+    .grid td 
+    {
+        cursor:pointer;
+        width:30px; height:30px;
+        border:1px solid #ccc;
+        text-align:center;
+        font-family:sans-serif; font-size:13px
+    }
+    .grid td.clicked 
+    {
+        background-color:yellow;
+    }
+    
+    .grid td.start
+    {
+        background-color: green;
+    }
+    .grid td.end
+    {
+        background-color: red;
+    }
+    .grid td.visited
+    {
+        background-color: blue;
+    }
+    .grid td.path
+    {
+        background-color: green;
+    }
+    .grid td.city
+    {
+        background-color: pink;
+    }
+
+
+    .navBar 
+    {
+        position: relative;
+        display: inline-block;
+    }
+    .travDrop 
+    {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+    }
+    .travContent
+    {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    .travContent button
+    {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+    .navBar:hover .travContent {display: block;}
+    .navBar:hover .travDrop {background-color: #3e8e41;}
+</style>
+<body>
+    <script src="vertex.js" type="text/javascript"></script>
+    <script src="mazeGeneration.js" type="text/javascript"></script>
+    <script src="grid.js" type="text/javascript"></script>
+    <div class="navBar"> 
+        <button id="travDrop" class="travDrop">Traversal Algorithm</button>
+        <div class="travContent">
+            <button id="bfs" class="dropBut" onclick="window.bfsBut(this)">bfs</buttton>
+            <button id="dfs" class="dropBut" onclick="window.dfsBut(this)">dfs</button>
+        </div>
+    </div>
+    <div class="navBar"> 
+        <button id="searchDrop" class="travDrop">Search Algorithm</button>
+        <div class="travContent">
+            <button id="dijk" class="dropBut" onclick="window.dijkBut(this)">Dijkstra's</buttton>
+            <button id="aStar" class="dropBut" onclick="window.aStarBut(this)">A*</buttton>
+        </div>
+    </div>
+    <div class="navBar"> 
+        <button id="mazeDrop" class="travDrop">Maze Algorithm</button>
+        <div class="travContent">
+            <button id="dfsMaze" class="dropBut" onclick="window.dfsMaze(this)">Create DFS maze</buttton>
+        </div>
+    </div>
+    <div>
+        <input type="checkbox" id="start" onchange="window.startCell(this)">Set Start Cell</td>
+        <input type="checkbox" id="end" onchange="window.endCell(this)">Set End Cell</td>
+        <input type="button" id="traverse" onclick="window.traverse(this)">Traverse </td>
+        <input type="button" id="clear" onclick="window.clear(this)">Clear</td>
+        <input type="button" id="weight" onclick="window.addWeight(this)">Add Random Weights</td>
+    </div>
+</body>

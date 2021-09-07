@@ -274,17 +274,25 @@ window.displayShadowmap = function(e) {
 /*
     File handler
 */
-window.handleFile = function(e) {
-    var reader = new FileReader();
-    reader.onload = function(evt) {
-        var parsed = JSON.parse(evt.target.result);
-        for(var layer in parsed){
-            var aux = parsed[layer];
+window.updateSkyline = function() {
+    var skyline = document.querySelector("#skyline").value;
+    if(skyline == "chicago")
+    {
+        var chicagoData = getChicagoData();
+        for(var layer in chicagoData){
+            var aux = chicagoData[layer];
             layers.addLayer(layer, aux['coordinates'], aux['indices'], aux['color'], aux['normals']);
-        }
+            }
     }
-    reader.readAsText(e.files[0]);
-}
+    else
+    {
+        var manhattanData = getManhattanData();
+        for(var layer in manhattanData){
+            var aux = manhattanData[layer];
+            layers.addLayer(layer, aux['coordinates'], aux['indices'], aux['color'], aux['normals']);
+            }
+    }
+;}
 
 /*
     Update transformation matrices
@@ -397,22 +405,18 @@ function initialize() {
     layers = new Layers();
     fbo = new FBO(currResolution);
     renderToScreen = new RenderToScreenProgram();
-    
-    // var parsed = JSON.parse(chicago);
-    // for(var layer in parsed){
-    //     var aux = parsed[layer];
-    //     layers.addLayer(layer, aux['coordinates'], aux['indices'], aux['color'], aux['normals']);
-    //     }
 
-    const fs = require('fs');
-
-    let rawdata = fs.readFileSync('chicago.json');
-    let student = JSON.parse(rawdata);
-    console.log(student);
+   var chicagoData = getChicagoData();
+   console.log(chicagoData);
+    for(var layer in chicagoData){
+        var aux = chicagoData[layer];
+        layers.addLayer(layer, aux['coordinates'], aux['indices'], aux['color'], aux['normals']);
+        }
     
     window.requestAnimationFrame(draw);
-
 }
+
+
 
 
 window.onload = initialize;
