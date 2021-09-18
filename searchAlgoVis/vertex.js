@@ -1,5 +1,7 @@
-var colMax = 20;
-var rowMax = 20;
+rowMax = window.rowMax;
+colMax = window.colMax;
+startCord = window.startCord;
+endCord = window.endCord;
 class Vertex
 {
     constructor(row, col, el)
@@ -13,13 +15,14 @@ class Vertex
         this.isWall = false;
         this.isStart = false;
         this.isEnd = false;
+        this.isCity = false;
     }
 }
 function fillAdj(vertices)
 {
-    for(var r = 0; r < colMax; r++)
+    for(var r = 0; r < rowMax; r++)
     {
-        for(var c = 0; c < rowMax; c++)
+        for(var c = 0; c < colMax; c++)
         {
             if(!vertices[r][c].isWall)
             {
@@ -71,14 +74,7 @@ function bfs(vertices, start)
     while(queue.length != 0)
     {
         var u = queue.shift();
-        delayed(10, function(u) 
-        {
-            return function() 
-            {
-                u.el.className = "visited";
-            };
-        }(u));
-
+        delayVisit(10, u);
         for(var i = 0; i < u.adj.length; i++)
         {
             if(u.adj[i].visited == false && u.adj[i].isWall == false)
@@ -96,14 +92,7 @@ function bfs(vertices, start)
 function dfs(vertices, v)
 {
     v.visited = true;
-    delayed(10, function(v) 
-        {
-            return function() 
-            {
-                v.el.className = "visited";
-            };
-        }(v));
-
+    delayVisit(10, v);
     for(var i = 0; i < v.adj.length; i++)
     {
         var next = vertices[v.adj[i].row][v.adj[i].col];
@@ -118,6 +107,7 @@ function dijkstra(vertices, start, end)
     var s = [];
     var dist = [];
     var prev = [];
+    var found = false;
 
     for(var r = 0; r<rowMax; r++)
     {
@@ -136,16 +126,11 @@ function dijkstra(vertices, start, end)
     {
             
         var u = getCordOfMinInQ(dist, q)[0];
-        delayed(10, function(u) 
-        {
-            return function() 
-            {
-                u.el.className = "visited";
-            };
-        }(u));
+        delayVisit(10, u);
         q.delete(u);
         if(u == end)
         {
+            found = true;
             u = end; 
             if(prev[u.row][u.col] != undefined || u == start)
             {
@@ -172,7 +157,8 @@ function dijkstra(vertices, start, end)
             }
         }
     }
-    getPath(s);
+    if(found)
+        getPath(s);
 }
 
 
@@ -195,13 +181,7 @@ function getPath(s)
     for(var i = 0; i<s.length; i++)
     {
         var u = s[i];
-        delayed(10, function(u) 
-        {
-            return function() 
-            {
-                u.el.className = "path";
-            };
-        }(u));
+        delayPath(10, u);
     }
 }
 
@@ -229,13 +209,7 @@ function aStar(start, end)
     while(openSet.size != 0)
     {
         var u = getCordOfMinInQ(fScore, openSet)[0];
-        delayed(10, function(u) 
-        {
-            return function() 
-            {
-                u.el.className = "visited";
-            };
-        }(u));
+        delayVisit(10, u);
         if( u == end)
         {
             path = makePath(cameFrom, u);
@@ -288,6 +262,26 @@ function unVisitVertices(vertices)
             vertices[i][j].visited = false;
         }
     }
+}
+function delayVisit(time, u)
+{
+    delayed(time, function(u) 
+        {
+            return function() 
+            {
+                u.el.className = "visited";
+            };
+        }(u));
+}
+function delayPath(time, u)
+{
+    delayed(time, function(u) 
+        {
+            return function() 
+            {
+                u.el.className = "path";
+            };
+        }(u));
 }
 var delayed = (function() {
     var queue = [];

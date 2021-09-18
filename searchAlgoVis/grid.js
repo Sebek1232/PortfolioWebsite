@@ -1,13 +1,13 @@
 var walls = new Map();
 var vertices = [];
-var isStart = false;
-var isEnd = false;
 var lastStart;
-var lastEnd;
-var startCord = [];
-var endCord = [];
+var lastEnd; 
+var startCord = [0,0];
+var endCord = [23,29];
 var curAlgoType;
 var curAlgo;
+var rowMax = 24;
+var colMax = 30; 
 function clickableGrid( rows, cols, callback ){
     var i=0;
     var grid = document.createElement('table');
@@ -19,6 +19,16 @@ function clickableGrid( rows, cols, callback ){
         for (var c=0;c<cols;++c)
         {
             var cell = tr.appendChild(document.createElement('td'));
+            if(r==0 && c==0)
+            {
+                cell.className = "start";
+                lastStart = cell;
+            }
+            if(r==23 && c==29)
+            {
+                cell.className = "end";
+                lastEnd = cell;
+            }
             var ver = new Vertex(r,c,cell);
             vertices[r][c] = ver;
 
@@ -32,62 +42,51 @@ function clickableGrid( rows, cols, callback ){
     return grid;
 }
 
-var grid = clickableGrid(20,20,function(el,row,col,i){
-    
-    setStartClass(el, row, col);
-    setEndClass(el, row, col);
-    
-    if(isStart == false && isEnd == false)
-    {
-        el.className='clicked';
-        vertices[row][col].isWall = true;
-    }
-
-    if(walls.has(el))
-    {
-        el.className="";
-        vertices[row][col].isWall = false;
-        walls.delete(el);
-    }
+var grid = clickableGrid(rowMax,colMax,function(el,row,col,i){
+    var startCheck = document.getElementById("start");
+    var endCheck = document.getElementById("end");
+    if(startCheck.checked)
+        setStartClass(el, row, col);
+    else if(endCheck.checked)
+        setEndClass(el, row, col);
     else
-        walls.set(el, [row,col]);
+    {
+        el.className="clicked";
+        vertices[row][col].isWall = true;
+        el.innerHTML="";
+        vertices[row][col].weight = 0;
+        if(walls.has(el))
+        {
+            el.className="";
+            vertices[row][col].isWall = false;
+            walls.delete(el);
+        }
+        else
+            walls.set(el, [row,col]);
+    }
+    
 });
 function setStartClass(el, row, col)
 {
-    
-    if(lastStart == el && isStart)
+    vertices[row][col].isStart = true;
+    el.className = "start";
+    startCord = [row, col];
+    if(lastStart != el)
     {
-        vertices[row][col].isStart = false;
         lastStart.className = "";
-        startCord = [];
-    }
-
-    else if(isStart)
-    {
-        vertices[row][col].isStart = true;
-        el.className= "start";
         lastStart = el;
-        startCord = [row, col];
     }
-    
 }
 
 function setEndClass(el, row, col)
 {
-    
-    if(lastEnd == el && isEnd)
+    vertices[row][col].isEnd = true;
+    el.className = "end";
+    endCord = [row, col];
+    if(lastEnd != el)
     {
-        vertices[row][col].isEnd = false;
         lastEnd.className = "";
-        endCord = [];
-    }
-
-    else if(isEnd)
-    {
-        vertices[row][col].isEnd = true;
-        el.className= "end";
         lastEnd = el;
-        endCord = [row, col];
     }
 }
 function updateTravBar(algo)
@@ -103,30 +102,43 @@ function updateSearchBar(algo)
 
 window.clear = function()
 {
+    startCord = [0,0];
+    endCord = [23,29];
     for(var r = 0; r < rowMax; r++)
     {
         for(var c = 0; c < colMax; c++)
         {
-            startCord = [];
-            endCord = [];
-            lastEnd = undefined;
-            lastStart = undefined;
-            vertices[r][c].visited = false; 
-            vertices[r][c].el.className = " ";
+            if(r==0 && c==0)
+            {
+                lastStart = vertices[r][c].el;
+                vertices[r][c].el.className = "start";
+            }
+            else if(r==23 && c==29)
+            {
+                lastEnd = vertices[r][c].el;
+                vertices[r][c].el.className = "end";
+            }
+            else
+            {
+                vertices[r][c].visited = false; 
+                vertices[r][c].el.className = " ";
+            }
         }
     }
 }
 
 window.startCell = function()
 {
-    isStart = !isStart;
+    var endCheck = document.getElementById("end");
+    endCheck.checked = false;
 }
 
 window.endCell = function()
 {
-    isEnd = !isEnd;
+    var startCheck = document.getElementById("start")
+    startCheck.checked = false; 
 }
-window.traverse = function()
+window.startTraverse = function()
 {
     if(curAlgoType == "trav")
     {
@@ -155,26 +167,34 @@ window.dfsMaze = function()
 window.bfsBut = function() 
 {
     updateTravBar("bfs");
+    updateSearchBar("Search Algorithim");
     curAlgoType = "trav";
     curAlgo = "bfs";
+    enableStart()
 }
 window.dfsBut = function() 
 {
     updateTravBar("dfs");
+    updateSearchBar("Search Algorithim");
     curAlgoType = "trav";
     curAlgo = "dfs";
+    enableStart()
 }
 window.dijkBut = function() 
 {
     updateSearchBar("Dijkstra's");
+    updateTravBar("Traversal Algorithim");
     curAlgoType = "search";
     curAlgo = "dijk";
+    enableStart()
 }
 window.aStarBut = function() 
 {
     updateSearchBar("A*");
+    updateTravBar("Traversal Algorithim");
     curAlgoType = "search";
     curAlgo = "aStar";
+    enableStart()
 }
 window.addWeight = function()
 {
@@ -182,11 +202,33 @@ window.addWeight = function()
     {
         for(var c = 0; c < colMax; c++)
         {
-            if(r%2 == 0 && c%2 == 0)
+            var rand = Math.ceil(Math.random() * 50);
+            if((r%rand == 0 && c%rand == 0) && vertices[r][c].isWall == false)
             {
-                vertices[r][c].el.innerHTML = "$$$";
+                let adj = vertices[r][c].adj;
+                let hasAdjCity = false;
+                for(let i = 0; i < adj.length; i++)
+                {
+                    if(adj[i].isCity)
+                    {
+                        hasAdjCity = true; 
+                        break;
+                    }
+                }
+                if(hasAdjCity == false && r != 0 && c != 0)
+                {
+                    vertices[r][c].el.innerHTML = '<img width="25" height="25" src="../searchAlgoVis/pics/city.png">';
+                    vertices[r][c].isCity = true;
+
+                }
+                else
+                {
+                    var weight = Math.ceil(Math.random() * 5);
+                    vertices[r][c].weight = weight;
+                    vertices[r][c].el.innerHTML = weight;
+                }
             }
-            else 
+            else if(vertices[r][c].isWall == false)
             {
                 var weight = Math.ceil(Math.random() * 5);
                 vertices[r][c].weight = weight;
@@ -196,6 +238,11 @@ window.addWeight = function()
     }
 }
 
+function enableStart()
+{
+    var start = document.getElementById("startBut");
+    start.disabled = false;
+}
 
 
 document.onload = fillAdj(vertices);

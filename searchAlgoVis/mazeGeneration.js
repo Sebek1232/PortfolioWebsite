@@ -1,5 +1,6 @@
-var colMax = 20;
-var rowMax = 20;
+rowMax = window.rowMax;
+colMax = window.colMax;
+
 function dfsMazeGeneration(vertices)
 {
    v = vertices[0][0];
@@ -11,18 +12,22 @@ function dfsMazeGeneration(vertices)
        var adj = getUnvisted(cur);
        if(adj.length != 0)
        {
-           var rand = Math.floor(Math.random() * adj.length);
+           var rand1 = Math.floor(Math.random() * adj.length);
+           var rand2 = Math.floor(Math.random() * adj.length);
            for(var i = 0; i<adj.length; i++)
            {
                adj[i].visited = true;
-               if(i != rand)
+               if(i != rand1 && 1 != rand2)
                {
                 stack.push(adj[i]);
                }
            }
-           stack.push(adj[rand]);
-           adj[rand].el.className = "";
-           adj[rand].isWall = false;
+           delayMazeVisit(10, adj[rand1]);
+           delayMazeVisit(10, adj[rand2]);
+           stack.push(adj[rand1]);
+           stack.push(adj[rand2]);
+           adj[rand1].isWall = false;
+           adj[rand2].isWall = false;
        }
    }
 
@@ -57,7 +62,20 @@ function makeAllWalls(vertices)
         {
             vertices[r][c].isWall = true; 
             vertices[r][c].visited = false;
-            vertices[r][c].el.className = "clicked"
+            vertices[r][c].el.className = "clicked";
+            vertices[r][c].weights = 0;
+            vertices[r][c].el.innerHTML = "";
+
         }
     }
+}
+function delayMazeVisit(time, u)
+{
+    delayed(time, function(u) 
+        {
+            return function() 
+            {
+                u.el.className = "";
+            };
+        }(u));
 }
