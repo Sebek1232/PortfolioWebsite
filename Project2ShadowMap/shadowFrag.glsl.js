@@ -15,8 +15,6 @@ vec3 shadowCalculation(vec4 lightSpacePos) {
 }
 
 void main() {
-    // TODO: compute shadowmap coordenates 
-    // TODO: evaluate if point is in shadow or not
     vec3 projCoords = shadowCalculation(vLightSpacePos);
     float closestDepth = texture(uSampler, projCoords.xy).r;
     float currentDepth = projCoords.z;

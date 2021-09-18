@@ -1,3 +1,4 @@
+html { scroll-behavior: smooth; } 
  body {
      background-color: #13293D;
      margin: 0;
@@ -5,27 +6,56 @@
  }
 
  h1 {
-     position: absolute;
+     position: relative;
      font-size: 60px;
      text-align: center;
      font-weight: bold;
      color: #f2f2f2;
-     top: 45%;
-     left: 50%;
-     transform: translate(-45%, -50%);
  }
-
  h2 {
+    position: relative;
+    font-size: 45px;
+    text-align: center;
+    font-weight: bold;
+    color: #f2f2f2
+}
+
+ h3 {
      display: block;
-     font-size: 30px;
+     font-size: 25px;
      text-align: center;
      font-weight: bold;
      color: #f2f2f2
+ }
+ h4
+ {
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: #f2f2f2
  }
 
  img {
      width: 400px;
      height: 300px;
+ }
+
+ video
+ {
+    width: 854px;
+    height: 480px;
+ } 
+ .projImg
+ {
+     position: relative;
+ }
+ .vMore
+ {
+     position: absolute;
+     display: none;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%, -50%);
 
  }
  .home{
@@ -35,13 +65,37 @@
      background-color: black;
      overflow:hidden;
  }
- #rowProjects {
+ .topLinks
+ {
+    position: absolute;
+    display: flex; 
+    justify-content: flex-end;
+    width: 100%;
+    z-index: 2;
+ }
+ .topLinks a 
+ {
+     color: #d1cfce;
+     font-size: larger;
+     text-align: center;
+     text-decoration: none;
+     width: 100px;
+     height: 25px;
+     padding: 10px
+ }
+ .topLinks a:hover
+ {
+    color: #ffffff;
+ }
+ .projects {
+     position: relative;
      text-align: center;
      margin: auto;
      padding-bottom: 15px;
  }
 
  .row {
+     position: relative;
      display: inline-block;
      margin-left: 15px;
  }
@@ -63,19 +117,56 @@
 
  }
 
- @keyframes moveR {
-     100% {
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-     }
+ .popUp
+ {
+     position: fixed;
+     display: none;
+     background-color: white;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%, -50%);
+     z-index: 3;
  }
+ .topPopUpBar
+ {
+    position: absolute;
+    display: flex; 
+    justify-content: flex-end;
+    width: 100%;
+ }
+
+ .topPopUpBar img
+ {
+     width: 30px;
+     height: 30px;
+     z-index: 99;
+ }
+ .topPopUpBar img:hover
+ {
+    opacity: .5;
+ }
+
 
  .cont {
      position: absolute;
      width: 100%;
      min-height: 100%;
 
+ }
+ .title
+ {
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%, -50%);
+ }
+ .title p
+ {
+    position: relative;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #f2f2f2;
  }
 
  .bubble-wrap {
@@ -91,20 +182,13 @@
      border-radius: 50%;
      background: white;
      opacity: .7;
-     animation: moveR 2.5s infinite;
-
  }
-//  @for $i from 1 through 100 {
-//          .bubbleR:nth-child(#{$i}) {
-//              animation-delay: -$i * .2s;
-//              left: random(100)* 1%;
-//              top: random(100) * 1%;
-//              transform: translate((random(100) * -1%), (random(100) * -1%));
-//          }
+
  @for $i from 1 through 100 {
      .bubbleR:nth-child(#{$i}) {
          animation: move#{$i} 10s infinite;
          animation-delay: -$i * .2s;
+         animation-direction: alternate;
          left: random(100)* 1%;
          top: random(100) * 1%;
          transform: translate((random(100) * -1%), (random(100) * -1%));

@@ -6,6 +6,11 @@
 </head>
 
 <body>
+    <div class="topLinks">
+        <a href="#projectsTop">Projects</a>
+        <a href="https://github.com/Sebek1232">GitHub</a>
+        <a href="./resume.pdf">Resume</a>
+    </div>
     <div class="home">
         <div class="cont">
             <div class="bubble-wrap">
@@ -59,87 +64,138 @@
                 <div class="bubbleR"></div>
                 <div class="bubbleR"></div>
                 <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
-                <div class="bubbleR"></div>
             </div>
-            <h1>Sebastian Greczek</h2>
+            <div class="title">
+                <h1>Sebastian Greczek</h1>
+                <p><i>Software Developer</i></p>
+            </div>
         </div>
     </div>
-    <div id="rowProjects">
+    <div class = projects id="projectsTop">
+        <h2>Projects</h2>
         <div class="row">
-            <h2>Javascript Raytracer</h2>
-            <img src="../projectImages/raytracer.PNG" alt="Raytracer">
+            <h3>Javascript Raytracer</h3>
+            <div class="proImag"> 
+                <img class="img" id="rayImg" src="../projectImages/raytracer.PNG" alt="Raytracer" onclick = "rayPopUp()">
+                <div class="vMore" id="rayText" onclick = "rayPopUp()"><h4>View Demo Vid</h4></div>
+            </div>
             <div class="links">
-                <a href="../Project1RayTracer/raytracerIndex.html"> Live Demo </a>
-                <a href="#github">GitHub</a>
+                <a href="../Project1RayTracer/index.html"> Live Demo </a>
+                <a href="https://github.com/Sebek1232/JSRaytracer">GitHub</a>
             </div>
         </div>
         <div class="row">
-            <h2>Shadow Mapping of City<br>Skyline in WebGL</h2>
-            <img src="../projectImages/chicago.PNG" alt="Raytracer">
+            <h3>Shadow Mapping WebGL</h3>
+            <div class="proImag"> 
+                <img class="img" src="../projectImages/chicago.PNG" alt="Shadow Mapping" onclick = "shadowPopUp()">
+                <div class="vMore" onclick = "shadowPopUp()"><h4>View Demo Vid</h4></div>
+            </div>
             <div class="links">
-                <a href="../Project2ShadowMap/shadowMapIndex.html"> Live Demo </a>
-                <a href="#github">GitHub</a>
+                <a href="../Project2ShadowMap/index.html"> Live Demo </a>
+                <a href="https://github.com/Sebek1232/Shadow-Mapping-in-WebGL">GitHub</a>
             </div>
         </div>
     </div>
 
-    <div id="rowProjects">
+    <div class = projects id="projects">
         <div class="row">
-            <h2>Javascript Raytracer</h2>
-            <img src="../projectImages/raytracer.PNG" alt="Raytracer">
+            <h3>Graph Application Visualization</h3>
+            <div class="proImag"> 
+                <img class="img" src="../projectImages/raytracer.PNG" alt="Raytracer" onclick = "graphPopUp()">
+                <div class="vMore" onclick = "graphPopUp()"><h4>View Demo Vid</h4></div>
+            </div>
             <div class="links">
-                <a href="raytracerIndex.html"> Live Demo </a>
-                <a href="#github">GitHub</a>
+                <a href="../searchAlgoVis/index.html"> Live Demo </a>
+                <a href="https://github.com/Sebek1232/Graph-Application-Visualization">GitHub</a>
             </div>
         </div>
         <div class="row">
-            <h2>Javascript Raytracer</h2>
-            <img src="../projectImages/raytracer.PNG" alt="Raytracer">
+            <h3>Coming Soon</h3>
+            <div class="proImag"> 
+                <img class="img" src="" alt="Coming Soon">
+                <div class="vMore"><h4>View Demo Vid</h4></div>
+            </div>
             <div class="links">
-                <a href="raytracerIndex.html"> Live Demo </a>
-                <a href="#github">GitHub</a>
+                <a href=""> Live Demo </a>
+                <a href="">GitHub</a>
             </div>
         </div>
     </div>
+    <div class="popUp" id="rayPop">
+        <div class="topPopUpBar"><img src="../projectImages/x but.PNG" onclick = "closePop()"></div>
+        <video controls>
+            <source src="../vids/raytracerDemo.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="popUp" id="shadowPop">
+        <div class="topPopUpBar"><img src="../projectImages/x but.PNG" onclick = "closePop()"></div>
+        <video controls>
+            <source src="../vids/shadowDemo.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="popUp" id="graphPop">
+        <div class="topPopUpBar"><img src="../projectImages/x but.PNG" onclick = "closePop()"></div>
+    </div>
+    <script>
+        var img = document.getElementsByClassName("img");
+        var view = document.getElementsByClassName("vMore");
+        for(let i = 0; i < img.length; i++)
+        {
+            img[i].onmouseover = function()
+            {
+                img[i].style.opacity = ".5";
+                view[i].style.display = "block";
+                img[i].style.cursor = "pointer";
+                view[i].style.cursor = "pointer";
+            };
+            img[i].onmouseout = function()
+            {
+                img[i].style.opacity = "1";
+                view[i].style.display = "none";
+            };
+            view[i].onmouseover = function()
+            {
+                img[i].style.opacity = ".5";
+                view[i].style.display = "block";
+            };
+            view[i].onmouseout = function()
+            {
+                img[i].style.opacity = "1";
+                view[i].style.display = "none";
+            };
+        }
+        // var rayImg = document.getElementById("rayImg");
+        // var rayText = document.getElementById("rayText");
+        // rayImg.onclick = rayPopUp();
+        // rayText.onclick = rayPopUp();
+        
+
+        function rayPopUp()
+        {
+            var popUp = document.getElementById("rayPop");
+            popUp.style.display = "block";
+        }
+        function shadowPopUp()
+        {
+            var popUp = document.getElementById("shadowPop");
+            popUp.style.display = "block";
+        }
+        function graphPopUp()
+        {
+            var popUp = document.getElementById("graphPop");
+            popUp.style.display = "block";
+        }
+
+        function closePop()
+        {
+            var popUp = document.getElementsByClassName("popUp");
+            for(let x of popUp)
+            {
+                x.style.display = "none";
+            }
+        }
+        
+    </script>
 </body>
 
 </html>

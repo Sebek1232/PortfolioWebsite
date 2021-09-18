@@ -127,7 +127,6 @@ function createVAO(gl, posAttribLoc, posBuffer, normAttribLoc = null, normBuffer
 */
 function multiplyMatrices(a, b) {
 
-    // TODO - Simplify for explanation
     // currently taken from https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js#L306-L337
 
     var result = [];

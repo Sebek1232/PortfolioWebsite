@@ -11,10 +11,10 @@ var gl;
 var layers = null
 var renderToScreen = null;
 var fbo = null;
-var currRotate = 0;
-var currLightRotate = 0;
+var currRotate = 180;
+var currLightRotate = 100;
 var currLightDirection = null;
-var currZoom = 0;
+var currZoom = 25;
 var currProj = 'perspective';
 var currResolution = 2048;
 var displayShadowmap = false;
