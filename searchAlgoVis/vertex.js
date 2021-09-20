@@ -16,6 +16,7 @@ class Vertex
         this.isStart = false;
         this.isEnd = false;
         this.isCity = false;
+        this.notWall = false;
     }
 }
 function fillAdj(vertices)
@@ -181,7 +182,7 @@ function getPath(s)
     for(var i = 0; i<s.length; i++)
     {
         var u = s[i];
-        delayPath(10, u);
+        delayPath(50, u);
     }
 }
 
@@ -251,6 +252,7 @@ function makePath(cameFrom, u)
     
     return path;
 }
+
 
 function unVisitVertices(vertices)
 {

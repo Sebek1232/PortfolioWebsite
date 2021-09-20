@@ -7,7 +7,7 @@ var endCord = [23,29];
 var curAlgoType;
 var curAlgo;
 var rowMax = 24;
-var colMax = 30; 
+var colMax = 32;
 function clickableGrid( rows, cols, callback ){
     var i=0;
     var grid = document.createElement('table');
@@ -164,6 +164,19 @@ window.dfsMaze = function()
     makeAllWalls(vertices);
     dfsMazeGeneration(vertices);
 }
+window.a_bMaze = function()
+{
+    makeAllWalls(vertices);
+    aldous_broder(vertices);
+}
+window.vertical = function()
+{
+    vert(vertices);
+}
+window.horizontal = function()
+{
+    horz(vertices);
+}
 window.bfsBut = function() 
 {
     updateTravBar("bfs");
@@ -202,33 +215,7 @@ window.addWeight = function()
     {
         for(var c = 0; c < colMax; c++)
         {
-            var rand = Math.ceil(Math.random() * 50);
-            if((r%rand == 0 && c%rand == 0) && vertices[r][c].isWall == false)
-            {
-                let adj = vertices[r][c].adj;
-                let hasAdjCity = false;
-                for(let i = 0; i < adj.length; i++)
-                {
-                    if(adj[i].isCity)
-                    {
-                        hasAdjCity = true; 
-                        break;
-                    }
-                }
-                if(hasAdjCity == false && r != 0 && c != 0)
-                {
-                    vertices[r][c].el.innerHTML = '<img width="25" height="25" src="../searchAlgoVis/pics/city.png">';
-                    vertices[r][c].isCity = true;
-
-                }
-                else
-                {
-                    var weight = Math.ceil(Math.random() * 5);
-                    vertices[r][c].weight = weight;
-                    vertices[r][c].el.innerHTML = weight;
-                }
-            }
-            else if(vertices[r][c].isWall == false)
+          if(vertices[r][c].isWall == false)
             {
                 var weight = Math.ceil(Math.random() * 5);
                 vertices[r][c].weight = weight;

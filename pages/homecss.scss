@@ -40,7 +40,7 @@ html { scroll-behavior: smooth; }
      height: 300px;
  }
 
- video
+ iframe
  {
     width: 854px;
     height: 480px;
@@ -64,6 +64,7 @@ html { scroll-behavior: smooth; }
      height: 100%;
      background-color: black;
      overflow:hidden;
+     z-index: -1;
  }
  .topLinks
  {
@@ -92,6 +93,7 @@ html { scroll-behavior: smooth; }
      text-align: center;
      margin: auto;
      padding-bottom: 15px;
+     margin-bottom: 40px;
  }
 
  .row {
@@ -186,8 +188,11 @@ html { scroll-behavior: smooth; }
 
  @for $i from 1 through 100 {
      .bubbleR:nth-child(#{$i}) {
+         $size: random(4) * 1px;
          animation: move#{$i} 10s infinite;
          animation-delay: -$i * .2s;
+         width: $size;
+         height: $size;
          animation-direction: alternate;
          left: random(100)* 1%;
          top: random(100) * 1%;

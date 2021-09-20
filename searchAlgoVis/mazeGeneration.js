@@ -17,7 +17,7 @@ function dfsMazeGeneration(vertices)
            for(var i = 0; i<adj.length; i++)
            {
                adj[i].visited = true;
-               if(i != rand1 && 1 != rand2)
+               if(i != rand1 && i != rand2)
                {
                 stack.push(adj[i]);
                }
@@ -30,9 +30,91 @@ function dfsMazeGeneration(vertices)
            adj[rand2].isWall = false;
        }
    }
-
 } 
 
+function aldous_broder(vertices)
+{
+    var randRow = Math.floor(Math.random() * rowMax);
+    var randCol = Math.floor(Math.random() * colMax);
+    var leftCells = rowMax * colMax - 1;
+
+    var cur = vertices[randRow][randCol];
+    cur.visited = true;
+    
+    while(leftCells > 0)
+    {
+        randAdj = cur.adj[Math.floor(Math.random() * cur.adj.length)];
+        if(randAdj.visited == false)
+        {
+            let chance = Math.floor(Math.random() * 10)
+            if(chance > 2)
+            {
+                randAdj.isWall = false;
+                delayMazeVisit(10, randAdj);
+            }
+            randAdj.visited = true;
+            leftCells--;
+        }
+        cur = randAdj;
+    }
+}
+function vert(vertices)
+{
+    for(let c = 0; c < colMax; c++)
+    {
+        if(c%2 == 0)
+            drawVWall(0, rowMax-1, c, vertices);
+    }
+    
+}
+function horz(vertices)
+{
+    for(let r = 0; r < rowMax; r++)
+    {
+        if(r%2 == 0)
+            drawHWall(0, colMax-1, r, vertices);
+    }
+}
+function drawHWall(minC, maxC, r, vertices)
+{
+    let rand = Math.floor(Math.random() * maxC);
+    let rand2 = Math.floor(Math.random() * maxC);
+    vertices[r][rand].notWall = true;
+    vertices[r][rand2].notWall = true;
+    for(let c = minC; c <= maxC; c++)
+    {
+        let v = vertices[r][c];
+        if(v.notWall == false)
+        {
+            v.isWall = true;
+            delayWall(10,v);
+        }
+    }
+}
+function drawVWall(minR, maxR, c, vertices)
+{
+    let rand = Math.floor(Math.random() * maxR);
+    let rand2 = Math.floor(Math.random() * maxR);
+    vertices[rand][c].notWall = true;
+    vertices[rand2][c].notWall = true;
+    for(let r = minR; r <= maxR; r++)
+    {
+        let v = vertices[r][c];
+        if(v.notWall == false)
+        {
+            v.isWall = true;
+            delayWall(10,v);
+        }
+    }
+}
+
+function markAdjVisisted(adj)
+{
+    for(let x in adj)
+    {
+        x.visited = true;
+    }
+}
 function hasUnvisited(v)
 {
     for(var i = 0; i < v.adj.length; i++)
@@ -76,6 +158,17 @@ function delayMazeVisit(time, u)
             return function() 
             {
                 u.el.className = "";
+            };
+        }(u));
+}
+
+function delayWall(time, u)
+{
+    delayed(time, function(u) 
+        {
+            return function() 
+            {
+                u.el.className = "clicked";
             };
         }(u));
 }
