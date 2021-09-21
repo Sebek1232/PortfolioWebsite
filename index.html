@@ -123,14 +123,14 @@
     </div>
     <div class="popUp" id="rayPop">
         <div class="topPopUpBar"><img src="./projectImages/x but.PNG" onclick = "closePop()"></div>
-        <iframe
-            src="https://www.youtube.com/embed/tgbNymZ7vqY">
+        <iframe class="vid"
+            src="https://www.youtube.com/embed/kVeUnlcg_8s">
         </iframe>
     </div>
     <div class="popUp" id="shadowPop">
         <div class="topPopUpBar"><img src="./projectImages/x but.PNG" onclick = "closePop()"></div>
-        <iframe 
-            src="https://www.youtube.com/embed/tgbNymZ7vqY">
+        <iframe class="vid"
+            src="https://www.youtube.com/embed/5re_XfQhdMk">
         </iframe>
     </div>
     <div class="popUp" id="graphPop">
@@ -185,9 +185,16 @@
         function closePop()
         {
             var popUp = document.getElementsByClassName("popUp");
+            var vid = document.getElementsByClassName("vid");
             for(let x of popUp)
             {
                 x.style.display = "none";
+            }
+            for(let x of vid)
+            {
+                let link = x.src;
+                x.src = "";
+                x.src = link;
             }
         }
         

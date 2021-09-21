@@ -110,18 +110,44 @@ window.clear = function()
         {
             if(r==0 && c==0)
             {
-                lastStart = vertices[r][c].el;
-                vertices[r][c].el.className = "start";
+                v = vertices[r][c];
+                lastStart = v.el;
+                v.el.className = "start";
+                v.weight = 0;
+                v.visited = false;
+                v.isWall = false;
+                v.isStart = true;
+                v.isEnd = false;
+                v.isCity = false;
+                v.notWall = false;
+                v.el.innerHTML = "";
             }
             else if(r==23 && c==29)
             {
-                lastEnd = vertices[r][c].el;
-                vertices[r][c].el.className = "end";
+                v = vertices[r][c];
+                lastEnd = v.el;
+                v.el.className = "end";
+                v.weight = 0;
+                v.visited = false;
+                v.isWall = false;
+                v.isStart = true;
+                v.isEnd = false;
+                v.isCity = false;
+                v.notWall = false;
+                v.el.innerHTML = "";
             }
             else
             {
-                vertices[r][c].visited = false; 
-                vertices[r][c].el.className = " ";
+                v = vertices[r][c]; 
+                v.el.className = "";
+                v.weight = 0;
+                v.visited = false;
+                v.isWall = false;
+                v.isStart = true;
+                v.isEnd = false;
+                v.isCity = false;
+                v.notWall = false;
+                v.el.innerHTML = "";
             }
         }
     }
@@ -158,6 +184,8 @@ window.startTraverse = function()
         else if(curAlgo == "aStar")
             aStar(vertices[startCord[0]][startCord[1]], vertices[endCord[0]][endCord[1]]);
     }
+
+    resetNavBar();
 }
 window.dfsMaze = function()
 {
@@ -229,6 +257,20 @@ function enableStart()
 {
     var start = document.getElementById("startBut");
     start.disabled = false;
+}
+function disableStart()
+{
+    var start = document.getElementById("startBut");
+    start.disabled = true;
+}
+
+function resetNavBar()
+{
+    disableStart();
+    updateSearchBar("Search Algorithim");
+    updateTravBar("Traversal Algorithim");
+    curAlgoType = "";
+    curAlgo = "";
 }
 
 
