@@ -1,1 +1,2 @@
-TODO
+# Javascript raytracer
+A javascript raytracer that uses the Canvas API to draw six spheres to a html element. A path is traced through each pixel from the camera to the object. Once the ray reaches an object, the ray will bounce off the surface, towards the two light sources. Shadows are determined on whether the bounced off ray reaches the light sources or is intersected by another object first. The user has control over the different lighting components, depth of reflections, and size, color, and position of the six spheres.
