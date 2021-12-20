@@ -1,2 +1,2 @@
 # PortfolioWebsite
-Website that hosts my resumes and some of my projects. 
+Website that hosts my resume and some of my projects. 
